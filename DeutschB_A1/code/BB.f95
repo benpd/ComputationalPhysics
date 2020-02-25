@@ -4,19 +4,19 @@ Program BB
 	implicit none
 	
 	real(dp), parameter ::  c = 3.00E8 		  	! speed of light
-	real(dp), parameter ::	h = 6.62E-34       	! Planck's constant  
-	real(dp), parameter ::  kb = 1.38E-23    	! Boltzmann constant
+	real(dp), parameter ::	h = 6.62E-34       	        ! Planck's constant  
+	real(dp), parameter ::  kb = 1.38E-23    		! Boltzmann constant
 
-	real(dp) :: T1 = 2.7						! temps	in Kelvin
+	real(dp) :: T1 = 2.7					! temps	in Kelvin
 	real(dp) :: T2 = 300						 
 	real(dp) :: T3 = 6500						 
 	
-	real(dp) :: v   							! frequency absorbed in EE
-	real(dp) :: constant = 2* (kb**3)/(c*h)**2	! constant package 
-	real(dp) :: EE 								! new replace for E 
-	real(dp) :: Eq 							 	! result from equation 1   
+	real(dp) :: v   					! frequency absorbed in EE
+	real(dp) :: constant = 2* (kb**3)/(c*h)**2		! constant package 
+	real(dp) :: EE 						! new replace for E 
+	real(dp) :: Eq 					 	! result from equation 1   
 	
-	integer:: i									! counting integer 
+	integer:: i						! counting integer 
 	
 	
 !_________TEMP 1___________		
