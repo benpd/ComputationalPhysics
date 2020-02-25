@@ -1,0 +1,290 @@
+\documentclass[12pt,letterpaper,notitlepage]{article}
+
+% Authors: Computational Physics Zoltan Papp & Andreas Bill
+% A few introductory LaTeX remarks:
+% There are many documents on the internet for an introduction to LaTeX. But you may be able to start with
+% those commentaries I wrote below.
+% The % sign is for commentaries in a latex document. All what follows the % on a line does not appear in the
+% compiled document.
+% You need to compile the program to see the text in postscript or pdf format. For that LaTeX must be installed on
+% your system. It is free and is often installed when you have a Linux/Unix system.
+% Every command starts with a backslash \
+% Two backslashes \\ means : new line. You can also write \newline.
+% Every mathematical expression (subscripts, vectors, etc.) is either contained between two $ signs (for example 
+% $x_1$ if it is in the text, or between the commands
+% \begin{eqnarray}
+% x_1
+% \end{eqnarray}
+% Certain symbols such as & { } are used as commands in text and tables and have a predefined meaning. If you 
+% want to have it in the text, you simply need to put a backslash in front of it: \&. This is in particular true for the curly
+% brackets {} because they are used to define command: \begin{eqnarray}.
+% The line on top of this document always needs to be the first line of the LaTeX document. You can change style by
+% replacing "article" with "report", "book", etc.
+% If you want the American Physical Society Journals standard Physical Review (Letters, A, B, C,...) then you write instead
+% of the expression above the following (for prb = Phys.Rev.B):
+% \documentclass[aps,prb,floatfix]{revtex4}
+
+% A LaTeX file contains packages allowing to do certain operations. For example the first below allows to draw 
+% graphics both BW and containing colors. The second allows to have .eps figures implemented. etc...
+\usepackage{color,graphicx}
+\usepackage{epsfig,epsf}
+\usepackage{epstopdf}
+\usepackage{curves}
+\usepackage{hyperref}
+\usepackage{caption}
+% The following packages are important as they allow to write certain mathematical expressions.
+\usepackage{amsmath}
+\usepackage{amssymb}
+% To write a code in a LaTeX document you need:
+\usepackage{listings}
+\usepackage{float}
+
+% Below are typical commands that you may need/want to use for the page dimensions. You can play around, but  
+% you don't need it if you use "revtex4" as documentclass.
+%\tolerance=10000
+%\textwidth18cm
+%\textheight24cm
+%\oddsidemargin-.5cm
+%\topmargin-2cm
+%\parindent4ex
+%\pagestyle{empty}
+%\markright{Test thisl \hfill command!} %Look at the top of the second page when you test it!...
+
+% You can define aliases for long commands. I often do so as shown below, although Physical Review does not 
+% accept them. But it is not difficult to replace the new command by the standard one. Here a few of those I use often:
+%
+%% Own definitions:
+\newcommand{\BEq}{\begin{eqnarray}}
+\newcommand{\EEq}{\end{eqnarray}}
+\newcommand{\BEqn}{\begin{eqnarray*}}
+\newcommand{\EEqn}{\end{eqnarray*}}
+%% The above first command for example means that instead of writing 
+%% \begin{eqnarray}
+%% to start an equation and can simply write
+%% \BEq
+%% The star in the third and fourth commands mean that you write an equation but don't number it.
+%% The command \begin{equation} also exists, but allows to write only one single line of equation.
+%% With the command \begin{eqnarray} you can write several lines of equations, each line delimited from the other 
+%% by the new line symbol \\. You can also align the equations by choosing what sign should be aligned in each line
+%% (for example the = sign) and write &=&. Note you can write the &=& only once per line!
+%
+%% When one wants Eqs(1a,1b,1c) etc. then use \BEqM ... \EEqM or the sequence \BM \BEq ... \EEq \EM:
+\newcommand{\BM}{\begin{subequations}}
+\newcommand{\EM}{\end{subequations}}
+\newcommand{\BEqM}{\begin{subequations}\begin{eqnarray}}
+\newcommand{\EEqM}{\end{eqnarray}\end{subequations}}
+\newcommand{\Bitem}{\begin{itemize}}
+\newcommand{\Eitem}{\end{itemize}}
+\newcommand{\Ben}{\begin{enumerate}}
+\newcommand{\Een}{\end{enumerate}}
+%% Greek letters:
+\renewcommand{\a}{\alpha}
+\renewcommand{\b}{\beta}
+\newcommand{\D}{\Delta}
+%%
+%% Colors:
+% e.g.: \TB{text} will write "text" in color blue.
+\newcommand{\TB}[1]{\textcolor{blue}{#1}}
+\newcommand{\TR}[1]{\textcolor{red}{#1}}
+
+\newcommand{\bm}[1]{\mbox{\boldmath $#1$}}
+\newcommand{\non}{\nonumber\\}
+
+%% Some simplified expressions:
+\def\eps{\varepsilon}
+\def\r{\right}
+\def\l{\left}
+\def\p{\partial}
+\def\d{\delta}
+\newcommand{\ta}{\mbox{$\theta$}}
+\newcommand{\ve}{\mbox{${\cal E}$}}
+\newcommand{\etab}{\bar{\eta}}
+\newcommand{\sg}{\tilde{\sigma}}
+\newcommand{\tap}{\mbox{$\theta'$}}
+\newcommand{\tta}{\mbox{$\tilde{\theta}$}}
+\newcommand{\ttap}{\mbox{$\tilde{\theta}'$}}
+\newcommand{\taz}{\mbox{$\theta_0$}}
+\newcommand{\phip}{\mbox{$\phi'$}}
+\newcommand{\tphi}{\mbox{$\tilde{\phi}$}}
+\newcommand{\tphip}{\mbox{$\tilde{\phi}'$}}
+\newcommand{\ty}{\mbox{$\tilde{y}$}}
+\newcommand{\gb}{\mbox{$\bar{\gamma}$}}
+\newcommand{\gone}{\mbox{$\gamma_1$}}
+\newcommand{\gtwo}{\mbox{$\gamma_2$}}
+\newcommand{\phiz}{\mbox{$\phi_0$}}
+\newcommand{\Nf}{\mbox{$N_f$}}
+\newcommand{\Nv}{\mbox{$N_v$}}
+\newcommand{\qt}{\mbox{$\tilde{q}$}}
+\newcommand{\qa}{\mbox{$q_\alpha$}}
+\newcommand{\tqa}{\mbox{$\tilde{q}_\alpha$}}
+\newcommand{\dqa}{\mbox{$\delta q_\alpha$}}
+\newcommand{\pqa}{\mbox{$\partial_{u} q_\alpha$}}
+\newcommand{\pqta}{\mbox{$\partial_{u} \tilde{q}_\alpha$}}
+\newcommand{\pdqa}{\mbox{$\partial_{u}\delta q_\alpha$}}
+\newcommand{\sn}{\mbox{${\rm sn}$}}
+\newcommand{\cn}{\mbox{${\rm cn}$}}
+\newcommand{\dn}{\mbox{${\rm dn}$}}
+\newcommand{\cd}{\mbox{${\rm cd}$}}
+%%% Creation, destruction operators:
+\newcommand{\cks}{\mbox{$c_{{\bf k},\sigma}$}}
+\newcommand{\cksd}{\mbox{$c_{{\bf k},\sigma}^\dagger$}}
+\newcommand{\cku}{\mbox{$c_{{\bf k},\uparrow}$}}
+\newcommand{\ckd}{\mbox{$c_{-{\bf k},\downarrow}$}}
+\newcommand{\ckud}{\mbox{$c_{{\bf k},\uparrow}^\dagger$}}
+\newcommand{\ckdd}{\mbox{$c_{-{\bf k},\downarrow}^\dagger$}}
+
+
+% That's the actual beginning of the document. All commands above affect the whole text, those below affect the 
+%  text locally.
+\begin{document}
+
+\lstset{language=Fortran,tabsize=4,numbers=left,numberstyle=\tiny,basicstyle=\ttfamily\small\color{dkblue},stringstyle=\ttfamily\color{blue},keywordstyle=\rmfamily\color{dkred}\bfseries\emph,backgroundcolor=\color{white},commentstyle=\color{dkgreen}}
+
+
+
+
+\title{%
+	Midterm 4: Investigation of Bound States in 1D Harmonic Oscillator with Given Potential   \\
+\large Computational Physics - Phys 562}
+\author{Benjamin Deutsch  \\
+Department of Physics\\
+California State University Long Beach}
+\date{\today }
+\maketitle
+
+
+
+\begin{abstract}
+No abstract    
+\end{abstract}
+
+%%%%%%%%%%%
+\section{Introduction}
+
+Analysis of a 1D harmonic oscillator can give us good insight into the underlying physics of certain systems as well as the effects of the different alternate parameters introduce into the basis for the total energy. We will look at the effects of the establishing a new potential (V) for this basis, from here a new computationally consistent Hamiltonian can be formed with addition of the (what will have to be) calculated matrix for kinetic.
+\begin{equation}
+\hat{T}+\hat{V}=\hat{H} 
+\end{equation}
+Where V is defined to be, 
+\begin{equation}
+V(x)=-\frac{10}{|i+x|}
+\end{equation}
+This Hamiltonian matrix contains the measurement of the total energy for this system, from which the eigenvalues and eigenstates can be expected. The importance these necessary functions will be discussed further in the report as they relate to the changing parameters. When this is done bound states for this system are distinguished apart from the free states, giving a physical meaning to the local neighbor of the particle or particle in the researched system. This is not a new challenge as we a previously perform parts of the code to be used. The complexity will arise in the perform the model of the new potential and correctly computing its behavior. Strong understanding of quantum mechanics is needed to grasp the subtle meaning of each of the numerical methods used herein, as well as working knowledge of the Fortran environment.
+
+
+%%%%%%%%%%
+ 
+\section{The Math}
+
+Beginning with our knowledge of the total energy for a 1-D oscillating system;
+	\begin{equation}
+		\hat{T_n}|{\psi}\rangle+\hat{U}|{\psi}\rangle=\hat{E_n}|{\psi_n}\rangle
+	\end{equation}
+Where $|{\psi}\rangle$ used in class previously as, 
+	\begin{equation}
+		\psi_n(x) = \frac{1}{\sqrt{2^n\,n!}} \cdot \left(\frac{m\omega}{\pi \hbar}\right)^{1/4}\cdot e^{
+		- \frac{m\omega x^2}{2 \hbar}} \cdot H_n\left(\sqrt{\frac{m\omega}{\hbar}} x \right)
+	\end{equation}
+and $\hat{E_n}$ as 
+	\begin{equation}
+		\hat{E_n}= \left(n+\frac{1}{2}\right) \hbar \omega	
+	\end{equation} 
+Finally the operator $\hat{U}$ as 
+	\begin{equation}
+		\hat{U}= \frac{1}{2}m\omega^2\hat{x^2}
+	\end{equation} 
+To find the kinetic energy we must perform some rearrangement,
+	\begin{equation}
+		\hat{T_n}|{\psi}\rangle=\hat{E_n}|{\psi_n}\rangle-\hat{U}|{\psi}\rangle
+	\end{equation} 
+Using the following operations to create matrices,
+	\begin{equation}
+		A_{m,n}=\langle{\psi_n}|\hat{A}|{\psi_n}\rangle
+	\end{equation} 
+	\begin {equation}
+		\langle \psi_i | \psi_j \rangle = \int^{\infty}_{-\infty} \psi^{*}_{i}(x)\, \psi_{j}(x) \, dx = I
+	\end{equation} 
+We can write the following,
+	\begin{equation}
+		\langle{\psi_n}|\hat{T}|{\psi_n}\rangle=\langle{\psi_n}|\hat{E_n}|{\psi_n}\rangle-\langle{\psi_n}|\hat{U}|{\psi_n}\rangle
+	\end{equation} 
+Note integration on the $E_n$ does not need to be perform has it has no reliance on the x parameter.
+We can finally write, 
+	\begin{equation}
+		T_{m,n} = \int_{a}^{b} \psi_{m}^{*} [(n+\frac{1}{2})\hbar\omega] \psi_n dx - \int_{a}^{b} \psi_{m}^{*} [\frac{1}{2}m\omega^2\hat{x}^2] \psi_n dx
+	\end{equation} 
+Which can be simplified to, 
+	\begin{equation}
+		T_{m,n} = E_n - \frac{1}{2}m\omega^2\int_{a}^{b} \psi_{m}^{*} \hat{x}^2 \psi_n dx
+	\end{equation} 
+Establishing E as a matrix and evaluating the integral, 
+	\begin{equation}
+		T_{m,n}=E_{m,n}+U_{m,n}
+	\end{equation} 
+From this we are required to calculate a new Hamiltonian utilizing the given potential $V(x)=-\frac{10}{|i+x|}$ by, 
+	\begin{equation}
+		H_{m,n}=T_{m,n}+V_{m,n}
+	\end{equation} 
+As stated above the iterated eigenvalues and eigenstates can be comprised from the resulting hamiltonian. 
+% is many tired of writing maths
+
+
+\section{The Code}
+
+To begin we initiated the code with a module, to house all variables indicating wether they were to be used as real, integer or array values. Some components of the early declarations are to be used in external subroutine for later calculations of the certain elements. File named, {\tt d01b.f95 } have been added to the mother directory labeled {\tt code} for this purpose. 
+External functions are created for computations of qualities that will be called into the main routine such as the psi functions that will iterate an integer number of times as needed, the potential operator $(\hat{U})$ is really just an external function as well and finally a function for the new potential $V(x)=-\frac{10}{|i+x|}$.   
+The main routine begins with the integration for the E matrix is not needed, so to put this into the code E was removed and done explicitly through a series of nested do loops entered diagonally as the energies of the harmonic oscillator. The wave integral is understood to be the identity matrix and ignored. The next step is to utilize the subroutine {\tt d01bcf.f95}, this is used to integrate the first potential function U with the psi functions (calculated below) using Guass-Legrendre. It should be noted that this is done simultaneously for the new potential (V) in the same loop. Saving this to matrix elements we have all the necessary components to perform the matrix arithmetic (12) (13) to achieve the new hamiltonian. We have created a shifted duplicate hamiltonian, so that the then called {\tt dsyev} can analytically produce the eigenvalues and eigenstates. We have cut off the positive eigenvalues, as these are outside the area of bound value and correspond to "free values" outside of the potential well.  
+             
+ \section{The Results}
+ 
+ As indicated by the test sheet the values for omega have been manually irritated, as discussed in class it has been determined that $\omega$=1 provides the best estimation for the lowest eigenvalues. Completely removing the positive values allows us to analyze only values that remain in the potential well of the function, with this information we can recognize that these bound states are the local regions were the particle or particles depending on the system are expected to be found. Below we can see the eigenvalues (eigen-energies) and the column vector of the associated eigenstates for n to 10.  As I have only given ten values, to comply with the test parameter for the dimension {\tt ndim} of 30, we can manually change this in the module
+ 
+\begin {center}
+	$\begin{array} {|c|c|}
+		\hline
+	   1  &-8.6473696457981344\\
+           2  &-6.3682627596826960\\
+           3  &-4.8037174853406475\\
+           4  &-3.7027145474319343\\
+           5  &-2.9186802374149203\\
+           6  &-2.3092318003945116\\
+           7  &-1.7600582655607726\\
+           8  &-0.77760076286157809\\
+           9  &-7.9663132970126421E-002\\
+          10 &[positive]\\
+          \hline
+      \end{array}$
+      \captionof{table}{Eigenvalues for $\omega=1$}
+      \end{center}
+ 
+With the associated eigen-vectors being shown (below) here columns 1-9, 
+\begin{center}
+	$
+	\begin{bmatrix}
+	   0.961	& 0.000	& -0.275	& 0.000	& -0.036	& -0.000	& 0.010	& 0.000	& -0.004 \\
+	  -0.000	& 0.944	& 0.000	& 0.312	& -0.000	& 0.098	& -0.000	& -0.040	& 0.000 \\
+	  -0.253	& 0.000	& -0.922	& 0.000	& 0.235	& 0.000	& -0.158	& -0.000	& 0.077\\
+	   0.000	& -0.294	& 0.000	& 0.935	& -0.000	& -0.075	& -0.000	& 0.161	& 0.000\\
+	   0.101	& -0.000	& 0.225	& -0.000	& 0.943	& 0.000	& -0.149	& 0.000	& -0.124\\
+	  -0.000	& 0.133	& -0.000	& -0.074	& 0.000	& -0.918	& -0.000	& 0.333	& 0.000\\
+	  -0.046	& 0.000	& -0.140	& 0.000	& 0.121	& -0.000	& 0.844	& 0.000	& -0.489\\
+	   0.000	& -0.060	& -0.000	& 0.147	& 0.000	& -0.273	& -0.000	& -0.868	& -0.000\\
+	   0.023	& -0.000	& 0.056	& 0.000	& 0.202	& 0.000	& 0.373	& -0.000 	& 0.779
+	\end{bmatrix}
+	$	
+\end{center}
+
+\section{The Results}
+
+In conclusion, each column above is comprised of the set of eigenvectors corresponding to the numerated eigen-energies (Table 1). It is important to mention the 10th column has been left out for clarity due to its associated positive eigenvalues. Once again we report the negative values only as they are the bound states (of new Hamiltonian for the V potential). Combining the eigenvalues with the eigenstates gives better representation of the placement of each wave and its energy within the potential well.
+      
+\begin{thebibliography}{}
+
+	\bibitem{}
+	Z.~Papp and A.~Bill, {\it Computational Physics Lecture Notes}, California State University Long Beach.
+	
+\end{thebibliography}
+
+
+
+\end{document}
